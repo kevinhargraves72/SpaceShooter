@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7581551170928013246}
   - component: {fileID: 7080232838707049433}
   - component: {fileID: 6913603138594633907}
-  - component: {fileID: 5446960599230869982}
+  - component: {fileID: -4805129458387481410}
   m_Layer: 7
   m_Name: EnemyBullet_01
   m_TagString: Untagged
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14e8ad609f665b47bd5d1cad9335c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 20
+  maxSpeed: 15
 --- !u!114 &6913603138594633907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 5
---- !u!114 &5446960599230869982
+--- !u!114 &-4805129458387481410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,8 +196,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2609901671796659514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c92ef7afd1952444bb1e227ee5efe9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d86b5d2114e7e64eaeeffea2e3174a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  invulnPeriod: 0

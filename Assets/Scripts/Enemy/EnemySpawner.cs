@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    [SerializeField] GameObject enemyPrefab;
 
-    public float enemyRate = 5f;
-    public float enemyRateIncrease = 0.9f;
-    public float spawnDistance = 12f;
+    [SerializeField] float enemyRate = 5f;
+    [SerializeField] float enemyRateIncrease = 0.9f;
+    [SerializeField] float spawnDistance = 12f;
     float nextEnemy = 1;
 
     private void Update()

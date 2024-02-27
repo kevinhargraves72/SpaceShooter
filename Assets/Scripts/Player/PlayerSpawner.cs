@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    [SerializeField] GameObject playerPrefab;
     private GameObject playerInstance;
 
     public int numLives = 4;

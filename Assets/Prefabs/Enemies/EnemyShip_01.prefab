@@ -163,7 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c92ef7afd1952444bb1e227ee5efe9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  maxHealth: 1
+  defense: 0
+  expAmount: 25
   invulnPeriod: 0
 --- !u!114 &-4266346283570985313
 MonoBehaviour:
@@ -207,7 +209,8 @@ MonoBehaviour:
   bulletSpawnPoints:
   - {fileID: 3600325842817823292}
   - {fileID: 3667171758562638970}
-  fireDelay: 1
+  Atk: 1
+  fireDelay: 1.5
 --- !u!1 &7129709229334857784
 GameObject:
   m_ObjectHideFlags: 0

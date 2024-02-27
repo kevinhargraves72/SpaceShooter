@@ -7,6 +7,7 @@ public class EnemyShooting : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform[] bulletSpawnPoints;
 
+    public float Atk;
     public float fireDelay = 0.5f;
     float cooldownTimer = 0;
     void Update()
@@ -16,13 +17,20 @@ public class EnemyShooting : MonoBehaviour
         if (cooldownTimer <= 0)
         {
             //SHOOT!
-            cooldownTimer = fireDelay;
-
-            foreach (Transform BSP in bulletSpawnPoints)
-            {
-                GameObject bullet = Instantiate(bulletPrefab, BSP.position, BSP.rotation);
-            }
+            Shoot();
         }
 
+    }
+
+    void Shoot()
+    {
+        cooldownTimer = fireDelay;
+
+        foreach (Transform BSP in bulletSpawnPoints)
+        {
+            GameObject bullet = Instantiate(bulletPrefab, BSP.position, BSP.rotation);
+            bullet.GetComponent<Bullet>().setDamage(Atk);
+            //give each bullet their propper damage 
+        }
     }
 }

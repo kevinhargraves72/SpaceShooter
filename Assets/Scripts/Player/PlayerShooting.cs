@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-    public Transform[] bulletSpawnPoints;
+    PlayerStats playerStats;
+    PrimaryFire primaryFire;
 
-    public float fireDelay = 0.25f;
-    float cooldownTimer = 0;
+    private void Start()
+    {
+        primaryFire = gameObject.GetComponent<PrimaryFire>();
 
+        playerStats = gameObject.GetComponent<Player>().GetPlayerStats();
+    }
     void Update()
     {
-        cooldownTimer -= Time.deltaTime;
-
-        if(Input.GetButton("Fire1") && cooldownTimer <= 0)
+        if (Input.GetButton("Fire1"))
         {
-            //SHOOT!
-            cooldownTimer = fireDelay;
-
-            foreach(Transform BSP in bulletSpawnPoints)
-            {
-                GameObject bullet = Instantiate(bulletPrefab, BSP.position, BSP.rotation);
-            }
+            primaryFire.Charge();
+        }
+        if(Input.GetButtonDown("Fire1")) //Check for player shooting
+        {
+            primaryFire.Shoot(playerStats.atk, playerStats.primaryFireDelay, playerStats.PrimaryBulletSpawns, playerStats.PrimaryBulletFab);
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            primaryFire.ReleaseCharge();
         }
         
+    }
+
+    public void SetPlayerStats(PlayerStats stats)
+    {
+        playerStats = stats;
     }
 }
