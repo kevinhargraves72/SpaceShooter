@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerSkills;
 
 public class Player : MonoBehaviour
 {
@@ -9,17 +10,8 @@ public class Player : MonoBehaviour
     PlayerMovement playerMovement;
     PlayerSkills playerSkills;
     PlayerStats playerStats;
-
-    [SerializeField] float defaultMaxHealth = 1f;
-    [SerializeField] float defaultDefense = 0f;
-
-    [SerializeField] float defaultAtk = 1f;
-    [SerializeField] float defaultPrimaryFireDelay = 0.25f;
-    int defaultPrimaryBulletFab = 0;
-    int defaultPrimaryBulletSpawns = 0;
-
-    [SerializeField] float defaultMaxSpeed = 5f;
-    [SerializeField] float defaultRotSpeed = 180f;
+    [SerializeField] GameObject chargeCannon;
+    [SerializeField] GameObject missleLaunchers;
 
     private void Awake()
     {
@@ -36,31 +28,66 @@ public class Player : MonoBehaviour
         if (GameMaster.Instance.playerData.Load() == true)//TODO IMPLEMENT REAL LOAD SYSTEM
         {
             GameMaster.Instance.playerData.testLoad = false;
-            SetDefaultStats();
+            playerStats.SetDefaultStats();
+            SetStats(playerStats);
             GameMaster.Instance.playerData.SetPlayerStats(playerStats);
         }
         else
         {
+            ResetSkills(playerSkills.GetUnlockedSkillList());
             SetStats(GameMaster.Instance.playerData.playerStats);
         }
     }
 
     private void PlayerSkills_OnSkillUnlocked(object sender, PlayerSkills.OnSkillUnlockedEventArgs e)
     {
-        switch (e.skillType)
+        SetSkill(e.skillType);
+    }
+    void SetSkill(PlayerSkills.SkillType skill)
+    {
+        switch (skill)
         {
             case PlayerSkills.SkillType.DoubleShot:
                 playerStats.PrimaryBulletSpawns = 1;
-                //playerShooting.SetPrimaryFireSpawn(1);
                 break;
             case PlayerSkills.SkillType.TrippleShot:
                 playerStats.PrimaryBulletSpawns = 2;
-                //playerShooting.SetPrimaryFireSpawn(2);
                 break;
             case PlayerSkills.SkillType.QuadShot:
                 playerStats.PrimaryBulletSpawns = 3;
-                //playerShooting.SetPrimaryFireSpawn(3);
                 break;
+            case PlayerSkills.SkillType.ChargeShot:
+                playerStats.MaxChargeActiveTime = 1f;
+                chargeCannon.SetActive(true);
+                break;
+            case PlayerSkills.SkillType.SecondaryFire:
+                playerStats.MissleCoolDown = 10f;
+                playerStats.MaxMissleCount = 4f;
+                playerStats.AtkMultiplyer = 5f;
+                missleLaunchers.SetActive(true);
+                GameMaster.Instance.UI_ActivateSecondaryFire.SetActive(true);
+                break;
+            case PlayerSkills.SkillType.Shield:
+                playerStats.MaxSHP = 10f;
+                playerStats.SRechargeRate = 1f;
+                playerStats.SRechargeDelay = 10f;
+                SetDamageHandler(playerStats);
+                GameMaster.Instance.UI_Shield.gameObject.SetActive(true);
+                break;
+            case PlayerSkills.SkillType.EnergySteal:
+                playerStats.ESMaxCooldown = 2f;
+                playerStats.ESMaxActiveTimer = 5f;
+                playerStats.ESHealPercent = 0.25f;
+                GameMaster.Instance.UI_ActivateEnergySteal.SetActive(true);
+                break;
+
+        }
+    }
+    void ResetSkills(List<SkillType> skills)
+    {
+        foreach(PlayerSkills.SkillType skill in skills)
+        {
+            SetSkill(skill);
         }
     }
 
@@ -80,26 +107,30 @@ public class Player : MonoBehaviour
 
     public void SetDamageHandler(PlayerStats stats)
     {
-        damageHandler.SetMaxHealth(stats.maxHealth);
-        damageHandler.setDefense(stats.defense);
+        damageHandler.SetAllDamageHandler(stats.maxHealth, stats.defense, stats.MaxSHP, stats.SRechargeDelay, stats.SRechargeRate);
     }
 
-    public void SetDefaultStats()
+    public void SetChargeShotActiveTime(float time)
     {
-        //Health
-        playerStats.maxHealth = defaultMaxHealth;
-        playerStats.defense = defaultDefense;
-
-        //Attack
-        playerStats.atk = defaultAtk;
-        playerStats.primaryFireDelay = defaultPrimaryFireDelay;
-        playerStats.PrimaryBulletFab = defaultPrimaryBulletFab;
-        playerStats.PrimaryBulletSpawns = defaultPrimaryBulletSpawns;
-
-        //Movement
-        playerStats.maxSpeed = defaultMaxSpeed;
-        playerStats.rotSpeed = defaultRotSpeed;
-
-        SetStats(playerStats);
+        playerStats.ChargeShotActiveTime = time;
+    }
+    public void AddChargeShotActiveTime(float time)
+    {
+        if(playerStats.ChargeShotActiveTime + time <= playerStats.MaxChargeActiveTime)
+        {
+            playerStats.ChargeShotActiveTime += time;
+        }
+    }
+    public float GetChargeShotActiveTimeNormalized()
+    {
+        if(playerStats.MaxChargeActiveTime != 0)
+        {
+            return playerStats.ChargeShotActiveTime / playerStats.MaxChargeActiveTime;
+        }
+        else
+        {
+            return 0;
+        }
+        
     }
 }

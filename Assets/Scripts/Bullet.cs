@@ -8,8 +8,8 @@ public class Bullet : MonoBehaviour
     float damage;
     DamageHandler enemy;
 
-    bool piercing = false;
-    int maxPierce;
+    [SerializeField] bool piercing = false;
+    [SerializeField] int maxPierce;
     int numPierced = 0;
     public void setDamage(float dmg)
     {

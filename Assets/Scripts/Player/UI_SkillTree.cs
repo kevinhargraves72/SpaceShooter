@@ -43,6 +43,11 @@ public class UI_SkillTree : MonoBehaviour
         skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_DoubleShot").GetComponent<Button>(), PlayerSkills.SkillType.DoubleShot, playerSkills));
         skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_TrippleShot").GetComponent<Button>(), PlayerSkills.SkillType.TrippleShot, playerSkills));
         skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_QuadShot").GetComponent<Button>(), PlayerSkills.SkillType.QuadShot, playerSkills));
+        skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_ChargeShot").GetComponent<Button>(), PlayerSkills.SkillType.ChargeShot, playerSkills));
+        skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_SecondaryFire").GetComponent<Button>(), PlayerSkills.SkillType.SecondaryFire, playerSkills));
+        skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_Shield").GetComponent<Button>(), PlayerSkills.SkillType.Shield, playerSkills));
+        skillButtonList.Add(new SkillButton(pauseMenu.transform.Find("skillBtn_EnergySteal").GetComponent<Button>(), PlayerSkills.SkillType.EnergySteal, playerSkills));
+
 
         playerSkills.OnSkillUnlocked += PlayerSkills_OnSkillUnlocked;
         playerSkills.OnSkillPointsChanged += PlayerSkills_OnSkillPointsChanged;

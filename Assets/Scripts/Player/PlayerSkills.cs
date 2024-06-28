@@ -14,16 +14,22 @@ public class PlayerSkills
     public enum SkillType
     {
         None,
-        DoubleShot,
-        TrippleShot,
-        QuadShot
+        ChargeShot,//Atk abilities start
+        DoubleShot,TrippleShot,QuadShot,
+        SecondaryFire,
+        Shield,
+        EnergySteal
     }
 
     private List<SkillType> unlockedSkillTypeList;
-    private int skillPoints;
+    private int skillPoints = 1;
     public PlayerSkills()
     {
         unlockedSkillTypeList = new List<SkillType>();
+    }
+    public List<SkillType> GetUnlockedSkillList()
+    {
+        return unlockedSkillTypeList;
     }
 
     public void AddSkillPoint()
