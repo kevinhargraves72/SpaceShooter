@@ -15,8 +15,8 @@ TagManager:
   - Player
   - Enemy
   - Invulnerable
-  - 
-  - 
+  - Player_Projectile
+  - Enemy_Projectile
   - 
   - 
   - 

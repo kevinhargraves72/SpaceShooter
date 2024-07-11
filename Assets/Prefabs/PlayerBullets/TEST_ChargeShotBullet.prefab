@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1809767076320478013}
   - component: {fileID: 3559502479864229139}
   - component: {fileID: 7657461743605476371}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: TEST_ChargeShotBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,3 +199,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d86b5d2114e7e64eaeeffea2e3174a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  piercing: 0
+  maxPierce: 0

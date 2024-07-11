@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3229294087342412031}
   - component: {fileID: 205475851679606708}
   - component: {fileID: 7474921914038624832}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4840,7 +4840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247676223964674616}
   - component: {fileID: 7698970528128608995}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: missile_render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4928,7 +4928,7 @@ GameObject:
   - component: {fileID: -415828341222012217}
   - component: {fileID: -732353142363197014}
   - component: {fileID: -977113492351918784}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: missile_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
