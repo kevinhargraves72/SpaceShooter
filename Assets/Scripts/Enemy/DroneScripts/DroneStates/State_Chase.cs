@@ -12,7 +12,11 @@ public class State_Chase : IState
         _enemy = enemy;
         _playerDetector = playerDetector;
     }
-    public void Tick() { }
+    public void Tick() 
+    {
+        _enemy.MoveForward();
+        _enemy.FaceTarget(_playerDetector.GetPlayerPosition());
+    }
 
     public void OnEnter() { }
 
