@@ -8,9 +8,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float InitialAtk;
     protected float Atk;
     [SerializeField] protected float InitialMaxSpeed;
-    protected float Speed;
+    public float Speed { get; set; }
     [SerializeField] protected float InitialRotationSpeed;
-    protected float RotationSpeed;
+    public float RotationSpeed { get; set; }
 
     protected DamageHandler DamageHandler;
     [SerializeField] protected int ExpAmount;
@@ -99,5 +99,7 @@ public abstract class Enemy : MonoBehaviour
     {
         GameMaster.Instance.playerData.levelSystem.AddExperience(ExpAmount);
         Destroy(gameObject);
-    }    
+    }
+    
+    
 }

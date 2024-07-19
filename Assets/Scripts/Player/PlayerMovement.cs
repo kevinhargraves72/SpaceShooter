@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
             
         }
         Thrust(canThrust);
-        Debug.Log(Input.GetAxis("Vertical"));
-        Debug.Log("velocity: " + rb.velocity + "transform.up.normalized: " + transform.up.normalized + "velocity.magnitude" + rb.velocity.magnitude);
+        //Debug.Log(Input.GetAxis("Vertical"));
+        //Debug.Log("velocity: " + rb.velocity + "transform.up.normalized: " + transform.up.normalized + "velocity.magnitude" + rb.velocity.magnitude);
         //TODO Toggle this for drifting?!?!?
         //Make this only run if isDrifting == false, otherwise it runs
     }
