@@ -6,7 +6,7 @@ public class PlayerDetector : MonoBehaviour
 {
     public bool PlayerInRange => _detectedPlayer != null;
 
-    [SerializeField] private float _range = 0.0f;
+    private float _range;
 
     private Player _detectedPlayer;
 
@@ -21,11 +21,7 @@ public class PlayerDetector : MonoBehaviour
     }
     private void Update()
     {
-        if(_range != 0.0f)
-        {
-            SearchInRange();
-            //OnDrawGizmos();
-        }
+       SearchInRange();
     }
     private void SearchInRange()
     {

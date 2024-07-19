@@ -5,30 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(DamageHandler))]
 public abstract class Enemy : MonoBehaviour
 {
-    //TO-DO: for abstract enemy base class
-    //Base Movement function that can be over ridden, movement then controlled by the state machine
-    //  - Variables: Max Movement speed, rotation speed 
-    //Abstract attack method to be implemented for each enemy type (could possible use: bullet prefab, bullet spawn pints, attack stat, fire delay
-    //Hook up to damageHandler events for onDamage and onDeath
-    //  -BaseOnDamage: if the player has charge shot unlocked charge the shot
-    //  -BaseOnDeath: Give the player  EXP
-    //StateMachine Base States:
-    //  -Wander
-    //  -Search?
-    //  -Attack
-    //  -Chase
-
-    //BaseEnemy Stuff
-    //-Initial max speed, initial rotation speed, speed, rotation speed
-    //-Face target (takes target, uses rotation speed)
-    //-Move forward (uses speed)
-    //-Get reference to damagehandle, subscribe to damage and death events, exp amount variable
-    //-Have base on death and on damage methods that give exp + destroys ship (will be diff script eventually)
-    //-Have damage charge player charge shot
-    //-Find player
-    //Abstract Stuff
-    //-Abstract attack method
-    //-Abstract moveTo method that takes target location ??
     [SerializeField] protected float InitialAtk;
     protected float Atk;
     [SerializeField] protected float InitialMaxSpeed;
@@ -39,7 +15,7 @@ public abstract class Enemy : MonoBehaviour
     protected DamageHandler DamageHandler;
     [SerializeField] protected int ExpAmount;
 
-    private StateMachine _stateMachine;
+    protected StateMachine _stateMachine;
 
     protected virtual void Awake()
     {
@@ -54,7 +30,7 @@ public abstract class Enemy : MonoBehaviour
 
         _stateMachine = new StateMachine();
 
-        void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
+        //void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
 
     }
 
