@@ -15,7 +15,9 @@ public class State_Attack_Ram : IState
     float _newMovementSpeed;
 
     Vector3 _targetPosition;
-    //Quaternion _targetRotation;
+    Quaternion _targetRotation;
+
+    public float AttackTime;
 
     public State_Attack_Ram(Enemy enemy, PlayerDetector playerDetector)
     {
@@ -25,19 +27,22 @@ public class State_Attack_Ram : IState
 
     public void Tick() 
     {
-        if(_enemy.transform.rotation != DesiredRotation(_targetPosition)) 
+        if(_enemy.transform.rotation != _targetRotation) 
         {
             _enemy.FaceTarget(_targetPosition);
         }
         else
         {
-            //RamAttack(_targetPosition);
+            //attacktime is set to 0 onEnter so the transition chosses how long it wants AT to add up before transitioning
+            _enemy.MoveForward();
+            AttackTime += Time.deltaTime;
         }
     }
 
     public void OnEnter()
     {
         _targetPosition = _playerDetector.GetPlayerPosition();
+        _targetRotation = DesiredRotation(_targetPosition);
 
         _originalRotSpeed = _enemy.RotationSpeed;
         _originalMovementSpeed = _enemy.Speed;
@@ -46,6 +51,8 @@ public class State_Attack_Ram : IState
 
         _enemy.RotationSpeed = _newRotSpeed;
         _enemy.Speed = _newMovementSpeed;
+
+        AttackTime = 0f;
     }
 
     public void OnExit()
