@@ -3480,16 +3480,32 @@ PrefabInstance:
       value: Test_EnemyDrone
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
-      propertyPath: DetectionRange
+      propertyPath: AttackRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: DetectionRange
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: InitialMaxSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: AttackTimeLength
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: InitialRotationSpeed
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.612936
+      value: -18.72
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.598175
+      value: 6.28
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_LocalPosition.z

@@ -23,8 +23,9 @@ public class State_Wander : IState
     {
         if (_enemy.transform.position != _wanderTarget)
         {
-            _enemy.MoveForward();
             _enemy.FaceTarget(_wanderTarget);
+            _enemy.MoveForward();
+
         }
         else
         {

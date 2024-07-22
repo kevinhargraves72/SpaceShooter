@@ -16,6 +16,7 @@ public class State_Attack_Ram : IState
 
     Vector3 _targetPosition;
     Quaternion _targetRotation;
+    Quaternion _previousRotation;
 
     public float AttackTime;
 
@@ -27,9 +28,13 @@ public class State_Attack_Ram : IState
 
     public void Tick() 
     {
-        if(_enemy.transform.rotation != _targetRotation) 
+        if(_enemy.transform.rotation != _previousRotation) 
         {
+            _previousRotation = _enemy.transform.rotation;
             _enemy.FaceTarget(_targetPosition);
+
+            //Debug.Log(_enemy.transform.rotation);
+            //Debug.Log(_targetRotation); might not be needed anymore
         }
         else
         {
@@ -59,6 +64,7 @@ public class State_Attack_Ram : IState
     {
         _enemy.RotationSpeed = _originalRotSpeed;
         _enemy.Speed = _originalMovementSpeed;
+        _previousRotation = new Quaternion(0, 0, 0, 0);
     }
 
     private Quaternion DesiredRotation(Vector3 target)

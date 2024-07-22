@@ -72,12 +72,12 @@ public abstract class Enemy : MonoBehaviour
         return player.transform;
     }
 
-    public float targetDistance(Transform target)
+    public float targetDistance(Vector3 target)
     {
-        return Vector3.Distance(target.position, transform.position);
+        return Vector3.Distance(target, transform.position);
     }
 
-    public bool targetInRange(Transform target, float range)
+    public bool targetInRange(Vector3 target, float range)
     {
         if(targetDistance(target) <= range)
         {

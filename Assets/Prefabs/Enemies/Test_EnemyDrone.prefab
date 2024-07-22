@@ -197,7 +197,9 @@ MonoBehaviour:
   InitialMaxSpeed: 5
   InitialRotationSpeed: 180
   ExpAmount: 15
-  DetectionRange: 0
+  DetectionRange: 10
+  AttackRange: 5
+  AttackTimeLength: 2
 --- !u!1 &7129709229334857784
 GameObject:
   m_ObjectHideFlags: 0
