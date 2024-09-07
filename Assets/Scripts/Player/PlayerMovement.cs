@@ -72,25 +72,25 @@ public class PlayerMovement : MonoBehaviour
     void CheckBounds(Vector3 pos)
     {
         //RESTRICT the player to the camera's bounds
-        if (pos.y + shipBoundaryRadius > Camera.main.orthographicSize)
+        if (pos.y + shipBoundaryRadius > Camera.main.orthographicSize + Camera.main.transform.position.y)
         {
-            pos.y = Camera.main.orthographicSize - shipBoundaryRadius;
+            pos.y = Camera.main.orthographicSize + Camera.main.transform.position.y - shipBoundaryRadius;
         }
-        if (pos.y - shipBoundaryRadius < -Camera.main.orthographicSize)
+        if (pos.y - shipBoundaryRadius < -Camera.main.orthographicSize + Camera.main.transform.position.y)
         {
-            pos.y = -Camera.main.orthographicSize + shipBoundaryRadius;
+            pos.y = -Camera.main.orthographicSize + Camera.main.transform.position.y + shipBoundaryRadius;
         }
         //calculate ortho width based on screen ratio
         float screenRatio = (float)Screen.width / (float)Screen.height;
         float widthOrtho = Camera.main.orthographicSize * screenRatio;
 
-        if (pos.x + shipBoundaryRadius > widthOrtho)
+        if (pos.x + shipBoundaryRadius > widthOrtho + Camera.main.transform.position.x)
         {
-            pos.x = widthOrtho - shipBoundaryRadius;
+            pos.x = widthOrtho + Camera.main.transform.position.x - shipBoundaryRadius;
         }
-        if (pos.x - shipBoundaryRadius < -widthOrtho)
+        if (pos.x - shipBoundaryRadius < -widthOrtho + Camera.main.transform.position.x)
         {
-            pos.x = -widthOrtho + shipBoundaryRadius;
+            pos.x = -widthOrtho + Camera.main.transform.position.x + shipBoundaryRadius;
         }
         transform.position = pos;
     }

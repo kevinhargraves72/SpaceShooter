@@ -5,9 +5,14 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster Instance { get; private set; }
+    
+    [SerializeField] CameraFollow followCam;
+    [SerializeField] float[] levelBounds;
+
     public PlayerData playerData { get; private set; }
     public GameObject playerInstance;
     private int lives;
+
     [SerializeField] TMP_Text UI_lifeCount;
     [SerializeField] Image healthBar;
     [SerializeField] Image sheildBar;
@@ -35,6 +40,8 @@ public class GameMaster : MonoBehaviour
     {
         SpawnPlayer();
         UI_lifeCount.text = "Lives:" + lives.ToString();
+        SetLevelBounds(levelBounds);
+        followCam.myTarget = playerInstance.transform;
     }
     void Update()
     {
@@ -80,5 +87,10 @@ public class GameMaster : MonoBehaviour
         UI_lifeCount.text = "Lives:" + lives.ToString();
         respawnTimer = 1;
         playerInstance = Instantiate(playerPrefab, transform.position, transform.rotation);
+    }
+    
+    void SetLevelBounds(float[] bounds)
+    {
+        followCam.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
     }
 }

@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 238285817}
   - component: {fileID: 238285816}
   - component: {fileID: 238285815}
+  - component: {fileID: 238285818}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -800,6 +801,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &238285818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238285814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edd40af3e5811448ab394c36803fa61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &241381595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1875,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5faffc4099c9c2d48974501f288833e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followCam: {fileID: 238285818}
+  levelBounds:
+  - -35
+  - 35
+  - -25
+  - 25
   playerInstance: {fileID: 512859230}
   UI_lifeCount: {fileID: 522391540}
   healthBar: {fileID: 1224053646}
@@ -2335,6 +2354,60 @@ RectTransform:
   m_AnchoredPosition: {x: 65, y: 23}
   m_SizeDelta: {x: 250, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &837183963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 837183965}
+  - component: {fileID: 837183964}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &837183964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837183963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c48569b71faf8db46b39e1297ba9662f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI_lifeCount: {fileID: 0}
+  healthBar: {fileID: 0}
+  sheildBar: {fileID: 0}
+  skillTree: {fileID: 0}
+  UI_EnergySteal: {fileID: 0}
+  UI_ActivateEnergySteal: {fileID: 0}
+  UI_PrimaryFire: {fileID: 0}
+  UI_SecondaryFire: {fileID: 0}
+  UI_Shield: {fileID: 0}
+  UI_ActivateSecondaryFire: {fileID: 0}
+--- !u!4 &837183965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837183963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.174425, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &865434163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,13 +3552,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test_EnemyDrone
       objectReference: {fileID: 0}
+    - target: {fileID: 3219935625893430250, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: AttackRange
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: AttackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: DetectionRange
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: InitialMaxSpeed
@@ -3493,7 +3574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: AttackTimeLength
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: InitialRotationSpeed
@@ -3501,11 +3582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.72
+      value: -5.36
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.28
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4653,3 +4734,4 @@ SceneRoots:
   - {fileID: 370363091}
   - {fileID: 788011729}
   - {fileID: 1512345268}
+  - {fileID: 837183965}
