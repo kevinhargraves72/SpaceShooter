@@ -1882,16 +1882,7 @@ MonoBehaviour:
   - -25
   - 25
   playerInstance: {fileID: 512859230}
-  UI_lifeCount: {fileID: 522391540}
-  healthBar: {fileID: 1224053646}
-  sheildBar: {fileID: 1641058249}
-  skillTree: {fileID: 4094058}
-  UI_EnergySteal: {fileID: 1898220765}
-  UI_ActivateEnergySteal: {fileID: 900598880}
-  UI_PrimaryFire: {fileID: 246984438}
-  UI_SecondaryFire: {fileID: 1226716576}
-  UI_Shield: {fileID: 53595037}
-  UI_ActivateSecondaryFire: {fileID: 1667376118}
+  UIManager: {fileID: 837183964}
   playerPrefab: {fileID: 2104309009474926357, guid: 816eee59816c17f4e8fede125676f16b, type: 3}
 --- !u!4 &580972665
 Transform:
@@ -2383,16 +2374,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48569b71faf8db46b39e1297ba9662f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI_lifeCount: {fileID: 0}
-  healthBar: {fileID: 0}
-  sheildBar: {fileID: 0}
-  skillTree: {fileID: 0}
-  UI_EnergySteal: {fileID: 0}
-  UI_ActivateEnergySteal: {fileID: 0}
-  UI_PrimaryFire: {fileID: 0}
-  UI_SecondaryFire: {fileID: 0}
-  UI_Shield: {fileID: 0}
-  UI_ActivateSecondaryFire: {fileID: 0}
+  UI_lifeCount: {fileID: 522391540}
+  healthBar: {fileID: 1224053646}
+  sheildBar: {fileID: 1641058249}
+  skillTree: {fileID: 4094058}
+  UI_EnergySteal: {fileID: 1898220765}
+  UI_ActivateEnergySteal: {fileID: 900598880}
+  UI_PrimaryFire: {fileID: 246984438}
+  UI_SecondaryFire: {fileID: 1226716576}
+  UI_Shield: {fileID: 53595037}
+  UI_ActivateSecondaryFire: {fileID: 1667376118}
 --- !u!4 &837183965
 Transform:
   m_ObjectHideFlags: 0
@@ -3554,7 +3545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3219935625893430250, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: InitialAtk
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
       propertyPath: AttackRange

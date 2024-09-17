@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,18 +13,9 @@ public class GameMaster : MonoBehaviour
 
     public PlayerData playerData { get; private set; }
     public GameObject playerInstance;
-    private int lives;
+    [NonSerialized] public int lives;
 
-    [SerializeField] TMP_Text UI_lifeCount;
-    [SerializeField] Image healthBar;
-    [SerializeField] Image sheildBar;
-    [SerializeField] UI_SkillTree skillTree;
-    public Image UI_EnergySteal;
-    public GameObject UI_ActivateEnergySteal;
-    public Transform UI_PrimaryFire;
-    public Transform UI_SecondaryFire;
-    public Transform UI_Shield;
-    public GameObject UI_ActivateSecondaryFire;
+    public UI_Manager UIManager;
 
     float respawnTimer;
     [SerializeField] GameObject playerPrefab;
@@ -39,7 +32,6 @@ public class GameMaster : MonoBehaviour
     void Start()
     {
         SpawnPlayer();
-        UI_lifeCount.text = "Lives:" + lives.ToString();
         SetLevelBounds(levelBounds);
         followCam.myTarget = playerInstance.transform;
     }
@@ -54,37 +46,11 @@ public class GameMaster : MonoBehaviour
             }
         }
         
-        UpdateUI();
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            skillTree.TogglePause();
-        }
-    }
-
-    void UpdateUI()
-    {
-        if (playerInstance != null)
-        {
-            healthBar.fillAmount = playerInstance.GetComponent<DamageHandler>().GetHealthNormalized();
-            if(UI_Shield.gameObject.activeSelf)
-            {
-                sheildBar.fillAmount = playerInstance.GetComponent<DamageHandler>().GetShieldNormalized();
-            }
-        }
-        else
-        {
-            healthBar.fillAmount = 0;
-            if (UI_Shield.gameObject.activeSelf)
-            {
-                sheildBar.fillAmount = 0;
-            }
-        }
     }
     void SpawnPlayer()
     {
         lives--;
-        UI_lifeCount.text = "Lives:" + lives.ToString();
+        UIManager.UpdateLivesUI();
         respawnTimer = 1;
         playerInstance = Instantiate(playerPrefab, transform.position, transform.rotation);
     }

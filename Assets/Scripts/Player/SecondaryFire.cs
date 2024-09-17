@@ -41,8 +41,8 @@ public class SecondaryFire : MonoBehaviour
         missleCount = playerStats.MaxMissleCount;
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
-        missleCoolDownUI = GameMaster.Instance.UI_SecondaryFire.Find("UI_MissleCoolDown").GetComponent<Image>();
-        missleCountText = GameMaster.Instance.UI_SecondaryFire.Find("UI_MissleCountText").GetComponent<TMP_Text>();
+        missleCoolDownUI = GameMaster.Instance.UIManager.UI_SecondaryFire.Find("UI_MissleCoolDown").GetComponent<Image>();
+        missleCountText = GameMaster.Instance.UIManager.UI_SecondaryFire.Find("UI_MissleCountText").GetComponent<TMP_Text>();
         targets = new List<Transform>();
     }
 

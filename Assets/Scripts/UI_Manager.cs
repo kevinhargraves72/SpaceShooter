@@ -16,13 +16,46 @@ public class UI_Manager : MonoBehaviour
     public Transform UI_SecondaryFire;
     public Transform UI_Shield;
     public GameObject UI_ActivateSecondaryFire;
+
     void Start()
     {
-        
+        UI_lifeCount.text = "Lives:" + GameMaster.Instance.lives.ToString();
     }
 
     void Update()
     {
-        
+        UpdateUI();
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            skillTree.TogglePause();
+        }
     }
+
+    void UpdateUI()
+    {
+        if (GameMaster.Instance.playerInstance != null)
+        {
+            healthBar.fillAmount = GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetHealthNormalized();
+            Debug.Log(GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetHealthNormalized());
+            if (UI_Shield.gameObject.activeSelf)
+            {
+                sheildBar.fillAmount = GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetShieldNormalized();
+            }
+        }
+        else
+        {
+            healthBar.fillAmount = 0;
+            if (UI_Shield.gameObject.activeSelf)
+            {
+                sheildBar.fillAmount = 0;
+            }
+        }
+    }
+
+    public void UpdateLivesUI()
+    {
+        UI_lifeCount.text = "Lives:" + GameMaster.Instance.lives.ToString();
+    }
+
 }

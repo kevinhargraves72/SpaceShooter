@@ -24,8 +24,8 @@ public class PrimaryFire : MonoBehaviour
 
     private void Start()
     {
-        UI_primaryFireCD = GameMaster.Instance.UI_PrimaryFire.Find("PrimaryFireCD_Bar").GetComponent<Image>();
-        UI_chargeShotGuage = GameMaster.Instance.UI_PrimaryFire.Find("ChargeShotCharge_Bar").GetComponent<Image>();
+        UI_primaryFireCD = GameMaster.Instance.UIManager.UI_PrimaryFire.Find("PrimaryFireCD_Bar").GetComponent<Image>();
+        UI_chargeShotGuage = GameMaster.Instance.UIManager.UI_PrimaryFire.Find("ChargeShotCharge_Bar").GetComponent<Image>();
     }
     private void Update()
     {

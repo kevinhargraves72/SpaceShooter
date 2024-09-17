@@ -25,7 +25,7 @@ public class EnergySteal : MonoBehaviour
     {
         damageHandler = GetComponent<DamageHandler>();
         playerStats = gameObject.GetComponent<Player>().GetPlayerStats();
-        UICoolDown = GameMaster.Instance.UI_EnergySteal;
+        UICoolDown = GameMaster.Instance.UIManager.UI_EnergySteal;
     }
 
     void Update()
