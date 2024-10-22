@@ -5,20 +5,22 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab;
-    private GameObject playerInstance;
+    [SerializeField] CameraFollow followCam;
+    public UI_Manager UIManager;
+    [SerializeField] float[] levelBounds; //-35, 35, -25, 25
 
-    public int numLives = 4;
+    public GameObject playerInstance;
 
     float respawnTimer;
     void Start()
     {
         SpawnPlayer();
+        SetLevelBounds(levelBounds);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(playerInstance == null && numLives > 0)
+        if(playerInstance == null && GameMaster.Instance.lives > 0)
         {
             respawnTimer -= Time.deltaTime;
             if(respawnTimer <= 0)
@@ -31,20 +33,17 @@ public class PlayerSpawner : MonoBehaviour
 
     void SpawnPlayer()
     {
-        numLives--;
+        GameMaster.Instance.lives--;
+        UIManager.UpdateLivesUI();
         respawnTimer = 1;
         playerInstance = Instantiate(playerPrefab, transform.position, transform.rotation);
+        playerInstance.GetComponent<Player>().SetUI_Manager(UIManager);
+        GameMaster.Instance.playerInstance = playerInstance;
     }
 
-    private void OnGUI()
+    void SetLevelBounds(float[] bounds)
     {
-        if(numLives > 0 || playerInstance != null)
-        {
-            GUI.Label(new Rect(0, 0, 100, 50), "Lives Left: " + numLives);
-        }
-        else
-        {
-            GUI.Label(new Rect(Screen.width/2 - 50, Screen.height/2 - 25, 100, 50), "Game Over");
-        }
+        followCam.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
     }
+
 }

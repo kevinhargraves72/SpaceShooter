@@ -5,6 +5,8 @@ using static PlayerSkills;
 
 public class Player : MonoBehaviour
 {
+    public UI_Manager UIManager;
+
     DamageHandler damageHandler;
     PlayerShooting playerShooting;
     PlayerMovement playerMovement;
@@ -65,20 +67,20 @@ public class Player : MonoBehaviour
                 playerStats.MaxMissleCount = 4f;
                 playerStats.AtkMultiplyer = 5f;
                 missleLaunchers.SetActive(true);
-                GameMaster.Instance.UIManager.UI_ActivateSecondaryFire.SetActive(true);
+                UIManager.UI_ActivateSecondaryFire.SetActive(true);
                 break;
             case PlayerSkills.SkillType.Shield:
                 playerStats.MaxSHP = 10f;
                 playerStats.SRechargeRate = 1f;
                 playerStats.SRechargeDelay = 10f;
                 SetDamageHandler(playerStats);
-                GameMaster.Instance.UIManager.UI_Shield.gameObject.SetActive(true);
+                UIManager.UI_Shield.gameObject.SetActive(true);
                 break;
             case PlayerSkills.SkillType.EnergySteal:
                 playerStats.ESMaxCooldown = 2f;
                 playerStats.ESMaxActiveTimer = 5f;
                 playerStats.ESHealPercent = 0.25f;
-                GameMaster.Instance.UIManager.UI_ActivateEnergySteal.SetActive(true);
+                UIManager.UI_ActivateEnergySteal.SetActive(true);
                 break;
 
         }
@@ -132,5 +134,9 @@ public class Player : MonoBehaviour
             return 0;
         }
         
+    }
+    public void SetUI_Manager(UI_Manager manager)
+    {
+        UIManager = manager;
     }
 }
