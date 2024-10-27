@@ -21,7 +21,7 @@ public class State_Wander : IState
 
     public void Tick() 
     {
-        if (_enemy.transform.position != _wanderTarget)
+        if (Vector3.Distance(_enemy.transform.position, _wanderTarget) > 5.0f)
         {
             _enemy.FaceTarget(_wanderTarget);
             _enemy.MoveForward();
@@ -31,14 +31,22 @@ public class State_Wander : IState
         {
             _wanderTarget = RandomPointInRange();
         }
+
+        Debug.DrawLine(_enemy.transform.position, _wanderTarget);
     }
 
     private Vector3 RandomPointInRange()
     {
-        return new Vector3(
-            Random.Range(_enemy.transform.position.x - _wanderRange, _enemy.transform.position.x + _wanderRange),
-            Random.Range(_enemy.transform.position.y - _wanderRange, _enemy.transform.position.y + _wanderRange),
-            0 );
+      while (true)
+      {
+          Vector3 point = new Vector3(
+          Random.Range(_enemy.transform.position.x - _wanderRange, _enemy.transform.position.x + _wanderRange),
+          Random.Range(_enemy.transform.position.y - _wanderRange, _enemy.transform.position.y + _wanderRange),
+          0);
+
+          if (GameMaster.Instance.levelManager.IsPointInLevelBounds(point))
+              return point;
+      }
     }
     public void OnEnter() 
     {

@@ -7,7 +7,7 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] CameraFollow followCam;
     public UI_Manager UIManager;
-    [SerializeField] float[] levelBounds; //-35, 35, -25, 25
+    //[SerializeField] float[] levelBounds; //-35, 35, -25, 25
 
     public GameObject playerInstance;
 
@@ -15,7 +15,7 @@ public class PlayerSpawner : MonoBehaviour
     void Start()
     {
         SpawnPlayer();
-        SetLevelBounds(levelBounds);
+        followCam.SetBounds();
     }
 
     void Update()
@@ -39,11 +39,7 @@ public class PlayerSpawner : MonoBehaviour
         playerInstance = Instantiate(playerPrefab, transform.position, transform.rotation);
         playerInstance.GetComponent<Player>().SetUI_Manager(UIManager);
         GameMaster.Instance.playerInstance = playerInstance;
-    }
-
-    void SetLevelBounds(float[] bounds)
-    {
-        followCam.setBounds(bounds[0], bounds[1], bounds[2], bounds[3]);
+        followCam.myTarget = playerInstance.transform;
     }
 
 }

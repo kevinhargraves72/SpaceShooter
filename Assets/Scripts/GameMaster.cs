@@ -10,6 +10,7 @@ public class GameMaster : MonoBehaviour
     
     public PlayerData playerData { get; private set; }
     public GameObject playerInstance;
+    public Level_Manager levelManager;
     [NonSerialized] public int lives;
 
     private void Awake()

@@ -21,12 +21,13 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    public void setBounds(float minX, float maxX, float minY, float maxY)
+    public void SetBounds()
     {
-        _maxX = maxX;
-        _minX = minX;
-        _minY = minY;
-        _maxY = maxY;
+        Level_Manager levelManager = GameMaster.Instance.levelManager;
+        _maxX = levelManager._maxX;
+        _minX = levelManager._minX;
+        _minY = levelManager._minY;
+        _maxY = levelManager._maxY;
     }
 
     void CheckBounds(Vector3 targetPos)
