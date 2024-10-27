@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Level_Manager : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class Level_Manager : MonoBehaviour
     {
         numQuestsCompleted++;
 
-        if (numQuestsCompleted == currentLevelQuests.Length - 1)
+        if (numQuestsCompleted == currentLevelQuests.Length)
         {
             CompleteLevel();
         }
@@ -69,7 +70,7 @@ public class Level_Manager : MonoBehaviour
 
     void CompleteLevel()
     {
-
+        SceneManager.LoadScene("StartMenuScene");
     }
 
 }

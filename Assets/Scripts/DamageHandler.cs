@@ -29,7 +29,7 @@ public class DamageHandler : MonoBehaviour
     SpriteRenderer spriteRend;
 
     public event Action<float> OnDamage;
-    public event Action OnDeath;
+    public event Action<GameObject> OnDeath;
 
     private void Start()
     {
@@ -92,7 +92,7 @@ public class DamageHandler : MonoBehaviour
 
         if (health <= 0)
         {
-            OnDeath();
+            OnDeath(this.gameObject);
         }
 
         if (invulnPeriod > 0) //start invulnerability period

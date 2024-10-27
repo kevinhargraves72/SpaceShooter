@@ -5,6 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(DamageHandler))]
 public abstract class Enemy : MonoBehaviour
 {
+    public enum WantedStatus
+    {
+        NotWanted,
+        Wanted
+    }
+
     [SerializeField] protected float InitialAtk;
     protected float Atk;
     [SerializeField] protected float InitialMaxSpeed;
@@ -12,10 +18,12 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float InitialRotationSpeed;
     public float RotationSpeed { get; set; }
 
-    protected DamageHandler DamageHandler;
+    public DamageHandler DamageHandler;
     [SerializeField] protected int ExpAmount;
 
     protected StateMachine _stateMachine;
+
+    public WantedStatus wantedStatus;
 
     protected virtual void Awake()
     {
@@ -29,6 +37,8 @@ public abstract class Enemy : MonoBehaviour
         DamageHandler.OnDeath += OnDeath;
 
         _stateMachine = new StateMachine();
+
+        wantedStatus = WantedStatus.NotWanted;
 
         //void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
 
@@ -95,10 +105,14 @@ public abstract class Enemy : MonoBehaviour
         GameMaster.Instance.playerInstance.GetComponent<EnergySteal>().HealDmg(damage);
     }
 
-    protected virtual void OnDeath() //ToDo this needs to be changed to allow calling of on death script
+    protected virtual void OnDeath(GameObject enemy) //ToDo this needs to be changed to allow calling of on death script
     {
         GameMaster.Instance.playerData.levelSystem.AddExperience(ExpAmount);
-        Destroy(gameObject);
+        
+        if (wantedStatus != WantedStatus.Wanted)
+        {
+            Destroy(gameObject);
+        }
     }
     
     
