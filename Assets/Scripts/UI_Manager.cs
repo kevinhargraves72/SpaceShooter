@@ -37,7 +37,7 @@ public class UI_Manager : MonoBehaviour
         if (GameMaster.Instance.playerInstance != null)
         {
             healthBar.fillAmount = GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetHealthNormalized();
-            Debug.Log(GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetHealthNormalized());
+            //Debug.Log(GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetHealthNormalized());
             if (UI_Shield.gameObject.activeSelf)
             {
                 sheildBar.fillAmount = GameMaster.Instance.playerInstance.GetComponent<DamageHandler>().GetShieldNormalized();

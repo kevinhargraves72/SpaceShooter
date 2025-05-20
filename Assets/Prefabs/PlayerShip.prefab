@@ -359,9 +359,9 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 1
-  m_AngularDrag: 0.1
+  m_AngularDrag: 50
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: adee908637921e642afe3d5310e61c61, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -583,9 +583,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   defense: 0
-  expAmount: 0
   invulnPeriod: 1
-  shieldRenderer: {fileID: 9091576047130489243}
+  shieldAlpha: 0
   maxSHP: 0
   rechargeDelay: 0
   rechargeRate: 0
@@ -601,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63e4209149798934a9c844fbbd8d255f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIManager: {fileID: 0}
   chargeCannon: {fileID: 2581794083776071888}
   missleLaunchers: {fileID: 1938372398762269295}
 --- !u!114 &8332529864984091824

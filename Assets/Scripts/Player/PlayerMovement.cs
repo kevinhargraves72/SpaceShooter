@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool canThrust = false;
     bool isDrifting = false;
+    float canControl = 0;
     float shipBoundaryRadius = 0.5f; // size of shit to offset when it hits boundary
     Vector3 pos;
     
@@ -18,20 +19,12 @@ public class PlayerMovement : MonoBehaviour
         playerStats = gameObject.GetComponent<Player>().GetPlayerStats();
         rb = this.GetComponent<Rigidbody2D>();
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        canControl = 1;
+    }
     void Update()
     {
-        //Rotate the ship
-        if (Input.GetAxis("Horizontal") != 0)
-            if (!isDrifting)
-            {
-                Rotate(Input.GetAxis("Horizontal"), playerStats.rotSpeed);
-            }
-            else
-            {
-                Rotate(Input.GetAxis("Horizontal"), playerStats.rotSpeed / 1.5f);
-            }
-            
-        //MOVE the ship
         if (Input.GetAxis("Vertical") == 1)//cannot thrust while drifting        //&& !isDrifting (these are to stop thrust while drifting)
             canThrust = true;
         if (Input.GetAxis("Vertical") != 1)                                     // || isDrifting
@@ -48,25 +41,42 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
-        if (!isDrifting)
+        if (canControl <= 0)
         {
-            rb.velocity = transform.up.normalized * rb.velocity.magnitude;
-        }
-        else if(canThrust)
-        {
-            //rb.velocity = (transform.up - transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
-            if(Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Horizontal") != 0)
+                if (!isDrifting)
+                {
+                    Rotate(Input.GetAxis("Horizontal"), playerStats.rotSpeed);
+                }
+                else
+                {
+                    Rotate(Input.GetAxis("Horizontal"), playerStats.rotSpeed / 2f);
+                }
+
+            if (!isDrifting)
             {
-                rb.velocity = -(transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
+                rb.velocity = transform.up.normalized * rb.velocity.magnitude;
             }
-            
+            else if (canThrust)
+            {
+                //rb.velocity = (transform.up - transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
+                if (Input.GetAxis("Horizontal") != 0)
+                {
+                    rb.velocity = -(transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
+                }
+
+            }
+            Thrust(canThrust);
+            //Debug.Log(Input.GetAxis("Vertical"));
+            //Debug.Log("velocity: " + rb.velocity + "transform.up.normalized: " + transform.up.normalized + "velocity.magnitude" + rb.velocity.magnitude);
+            //TODO Toggle this for drifting?!?!?
+            //Make this only run if isDrifting == false, otherwise it runs
         }
-        Thrust(canThrust);
-        //Debug.Log(Input.GetAxis("Vertical"));
-        //Debug.Log("velocity: " + rb.velocity + "transform.up.normalized: " + transform.up.normalized + "velocity.magnitude" + rb.velocity.magnitude);
-        //TODO Toggle this for drifting?!?!?
-        //Make this only run if isDrifting == false, otherwise it runs
+        else
+        {
+            canControl -= Time.deltaTime;
+        }
+
     }
 
     void CheckBounds(Vector3 pos)
@@ -115,18 +125,11 @@ public class PlayerMovement : MonoBehaviour
         //CheckBoundaries
        CheckBounds(pos);
     }
+
     void Rotate(float input, float rotSpeed)
     {
-        //Grab rotation quaternion
-        Quaternion rot = transform.rotation;
-        //Grab z euler angle
-        float z = rot.eulerAngles.z;
-        //Change the Z angle based on input
-        z -= input * rotSpeed * Time.deltaTime;
-        //recreate quaternion
-        rot = Quaternion.Euler(0, 0, z);
-        //Feed quaternion into rotation
-        transform.rotation = rot;
+        rb.AddTorque(-input * rotSpeed, ForceMode2D.Impulse);
+        Debug.Log(rb.angularVelocity);
     }
 
     public void SetPlayerStats(PlayerStats stats)

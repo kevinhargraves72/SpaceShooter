@@ -62,8 +62,8 @@ public class PlayerStats
     public float defaultAtkMultiplyer = 0f;
     
     //Movement
-    public float defaultMaxSpeed = 10f;//was 5
-    public float defaultRotSpeed = 180f;
+    public float defaultMaxSpeed = 20f;//was 5, then 10, now set to 20 for testing
+    public float defaultRotSpeed = 0.15f; //was 180 before system switched to torque (instead of manipulating transform)
 
     public void SetDefaultStats()
     {
