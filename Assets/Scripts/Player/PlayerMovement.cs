@@ -10,9 +10,11 @@ public class PlayerMovement : MonoBehaviour
 
     bool canThrust = false;
     bool isDrifting = false;
+    bool rightDrift = false;
+    bool leftDrift = false;
     float canControl = 0;
     float shipBoundaryRadius = 0.5f; // size of shit to offset when it hits boundary
-    Vector3 pos;
+
     
     private void Start()
     {
@@ -25,18 +27,27 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetAxis("Vertical") == 1)//cannot thrust while drifting        //&& !isDrifting (these are to stop thrust while drifting)
-            canThrust = true;
-        if (Input.GetAxis("Vertical") != 1)                                     // || isDrifting
-            canThrust = false;
-        //If player does leftShift input turns is drifting to true
+        //if (Input.GetAxis("Vertical") == 1)//cannot thrust while drifting        //&& !isDrifting (these are to stop thrust while drifting)
+        //    canThrust = true;
+        //if (Input.GetAxis("Vertical") != 1)                                     // || isDrifting
+        //    canThrust = false;
+        ////If player does leftShift input turns is drifting to true
         if (Input.GetButton("Ability2"))
         {
             isDrifting = true;
+            if(Input.GetAxis("Horizontal") > 0)
+            {
+                rightDrift = true;
+            }
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                leftDrift = true;
+            }
         }
         else
         {
             isDrifting = false;
+            
         }
     }
     private void FixedUpdate()
@@ -53,20 +64,9 @@ public class PlayerMovement : MonoBehaviour
                     Rotate(Input.GetAxis("Horizontal"), playerStats.rotSpeed / 2f);
                 }
 
-            if (!isDrifting)
-            {
-                rb.velocity = transform.up.normalized * rb.velocity.magnitude;
-            }
-            else if (canThrust)
-            {
-                //rb.velocity = (transform.up - transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
-                if (Input.GetAxis("Horizontal") != 0)
-                {
-                    rb.velocity = -(transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
-                }
-
-            }
-            Thrust(canThrust);
+            drift();
+            Thrust(Input.GetAxis("Vertical"));
+            
             //Debug.Log(Input.GetAxis("Vertical"));
             //Debug.Log("velocity: " + rb.velocity + "transform.up.normalized: " + transform.up.normalized + "velocity.magnitude" + rb.velocity.magnitude);
             //TODO Toggle this for drifting?!?!?
@@ -76,7 +76,29 @@ public class PlayerMovement : MonoBehaviour
         {
             canControl -= Time.deltaTime;
         }
+        CheckBounds(transform.position);
 
+
+    }
+    void drift()
+    {
+        if (!isDrifting)
+        {
+            rb.velocity = transform.up.normalized * rb.velocity.magnitude; // If you dont have the the movement feels wayyy more normal physics based, probably interesting to play around with
+        }
+        if (isDrifting)
+        {
+            if (rightDrift && !leftDrift)
+            {
+                rb.velocity = -(transform.right).normalized * rb.velocity.magnitude;
+            }
+            if (leftDrift && !rightDrift)
+            {
+                rb.velocity = (transform.right).normalized * rb.velocity.magnitude;
+            }
+            //rb.velocity = (transform.up - transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
+            //rb.velocity = -(transform.right * Input.GetAxis("Horizontal")).normalized * rb.velocity.magnitude;
+        }
     }
 
     void CheckBounds(Vector3 pos)
@@ -85,10 +107,12 @@ public class PlayerMovement : MonoBehaviour
         if (pos.y + shipBoundaryRadius > Camera.main.orthographicSize + Camera.main.transform.position.y)
         {
             pos.y = Camera.main.orthographicSize + Camera.main.transform.position.y - shipBoundaryRadius;
+            transform.position = pos;
         }
         if (pos.y - shipBoundaryRadius < -Camera.main.orthographicSize + Camera.main.transform.position.y)
         {
             pos.y = -Camera.main.orthographicSize + Camera.main.transform.position.y + shipBoundaryRadius;
+            transform.position = pos;
         }
         //calculate ortho width based on screen ratio
         float screenRatio = (float)Screen.width / (float)Screen.height;
@@ -97,33 +121,35 @@ public class PlayerMovement : MonoBehaviour
         if (pos.x + shipBoundaryRadius > widthOrtho + Camera.main.transform.position.x)
         {
             pos.x = widthOrtho + Camera.main.transform.position.x - shipBoundaryRadius;
+            transform.position = pos;
         }
         if (pos.x - shipBoundaryRadius < -widthOrtho + Camera.main.transform.position.x)
         {
             pos.x = -widthOrtho + Camera.main.transform.position.x + shipBoundaryRadius;
+            transform.position = pos;
         }
-        transform.position = pos;
+        
     }
-    void Thrust(bool thrust)
+    void Thrust(float input)
     {
-       if (thrust)
+       if (input == 1)
        {
             if (!isDrifting)
             {
                 rb.AddForce(transform.up * playerStats.maxSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
             }
-            else if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1)
+            else
             {
                 rb.AddForce(-(transform.right * Input.GetAxis("Horizontal")).normalized * playerStats.maxSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
             }
            
        }
        
-       pos = transform.position;
-       //Vector3 velocity = new Vector3(0, input * playerStats.maxSpeed * Time.deltaTime, 0);
-       //pos += transform.rotation * velocity;
+        //Vector3 velocity = new Vector3(0, input * playerStats.maxSpeed * Time.deltaTime, 0);
+        //pos += transform.rotation * velocity;
         //CheckBoundaries
-       CheckBounds(pos);
+        
+
     }
 
     void Rotate(float input, float rotSpeed)
