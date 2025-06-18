@@ -21,9 +21,9 @@ public class PlayerDetector : MonoBehaviour
     }
     private void Update()
     {
-       SearchInRange();
+       DetectInRange();
     }
-    private void SearchInRange()
+    private void DetectInRange()
     {
         Collider2D collider = Physics2D.OverlapCircle(transform.position, _range, _playerLayerMask);
         
@@ -34,6 +34,20 @@ public class PlayerDetector : MonoBehaviour
         else if(_detectedPlayer != null)
         {
             _detectedPlayer = null;
+        }
+    }
+
+    public bool SearchInRange(float range)
+    {
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, range, _playerLayerMask);
+
+        if (collider != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     public void SetRange(float range)

@@ -99,6 +99,17 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    public float GetInitialMaxSpeed()
+    {
+        return InitialMaxSpeed;
+    }
+
+    public float GetInitialRotationSpeed()
+    {
+        return InitialRotationSpeed;
+    }
+
+
     protected virtual void OnDamage(float damage)
     {
         GameMaster.Instance.playerInstance.GetComponent<Player>().AddChargeShotActiveTime(damage);
@@ -113,6 +124,11 @@ public abstract class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public IState GetCurrentState()
+    {
+        return _stateMachine.GetCurrentState();
     }
     
     

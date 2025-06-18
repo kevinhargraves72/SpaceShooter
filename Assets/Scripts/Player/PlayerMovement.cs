@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
     void Rotate(float input, float rotSpeed)
     {
         rb.AddTorque(-input * rotSpeed, ForceMode2D.Impulse);
-        Debug.Log(rb.angularVelocity);
+        //Debug.Log(rb.angularVelocity);
     }
 
     public void SetPlayerStats(PlayerStats stats)
