@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FormationHandler : MonoBehaviour
 {
     public GameObject[] formationGroup;
-    public float followBuffer = 1000f;
+    public float followBuffer = 0.5f;
     
     private int formationPosition;
     private int leaderPosition = 0;
@@ -80,15 +81,20 @@ public class FormationHandler : MonoBehaviour
         {
             if (formationGroup[i] != null)
             {
-                --formationPosition;
                 leaderPosition = i;
                 if (IsLeader()) { isLeader = true; }
+                break;
             }
             else
             {
                 --formationPosition;
             }
         }
+    }
+
+    public int GetFormationPosition()
+    {
+        return formationPosition;
     }
 
     public IState LeaderCurrentState()

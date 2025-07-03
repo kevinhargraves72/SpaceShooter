@@ -1143,6 +1143,7 @@ Transform:
   - {fileID: 4623725590075781713}
   - {fileID: 4832013865174670377}
   - {fileID: 4666009310480935071}
+  - {fileID: 8337135958729516092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2072974920305405272
@@ -2088,6 +2089,80 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &1746961231762799779
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 381089477326977947}
+    m_Modifications:
+    - target: {fileID: 3219935625893430250, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_Name
+      value: Test_EnemyDrone
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219935625893430250, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: AttackCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184405618124446138, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: AttackTimeLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.8959255
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.551916
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.07195374
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89687d144973a1e45833b6f129944287, type: 3}
+--- !u!4 &8337135958729516092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7749858262696908959, guid: 89687d144973a1e45833b6f129944287, type: 3}
+  m_PrefabInstance: {fileID: 1746961231762799779}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2919392512857818294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2099,6 +2174,10 @@ PrefabInstance:
     - target: {fileID: 3219935625893430250, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: m_Name
       value: Test_EnemyFormationDrone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219935625893430250, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4474709514707262032, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: followBuffer
@@ -2125,8 +2204,24 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: AttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: AttackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: InitialMaxSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: AttackTimeLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: formationAttackDelay
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7184405618124446138, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: wantedStatus
@@ -2200,6 +2295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test_EnemyFormationDrone (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3219935625893430250, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4474709514707262032, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: followBuffer
       value: 0.5
@@ -2225,8 +2324,24 @@ PrefabInstance:
       value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: AttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: AttackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: InitialMaxSpeed
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: AttackTimeLength
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: formationAttackDelay
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2295,6 +2410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test_EnemyFormationDrone
       objectReference: {fileID: 0}
+    - target: {fileID: 3219935625893430250, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4474709514707262032, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: formationGroup.Array.data[1]
       value: 
@@ -2304,24 +2423,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 568152691168883690}
     - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
-      propertyPath: offset.x
-      value: 0
+      propertyPath: AttackRange
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
-      propertyPath: offset.y
-      value: -2
+      propertyPath: AttackCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
-      propertyPath: ChaseRange
-      value: 20
+      propertyPath: AttackTimeLength
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
-      propertyPath: DetectionRange
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5369679382939280381, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
-      propertyPath: InitialMaxSpeed
-      value: 7
+      propertyPath: formationAttackDelay
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7749858262696908959, guid: b351b5de51454f64695d2b7983831c3b, type: 3}
       propertyPath: m_LocalPosition.x

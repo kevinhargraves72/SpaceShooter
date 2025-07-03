@@ -22,7 +22,7 @@ public class Enemy_Drone : Enemy
         playerDetector.SetRange(DetectionRange);
 
         var wander = new State_Wander(this, DetectionRange);
-        var chase = new State_Chase(this, playerDetector);
+        var chase = new State_Chase(this, playerDetector);  
         attack = new State_Attack_Ram(this, playerDetector);
 
         void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -28,19 +29,22 @@ public class State_Attack_Ram : IState
 
     public void Tick() 
     {
-        if(_enemy.transform.rotation != _previousRotation) 
+        if(_enemy.transform.rotation != _previousRotation && AttackTime == 0) 
         {
             _previousRotation = _enemy.transform.rotation;
             _enemy.FaceTarget(_targetPosition);
+            //Debug.Log(AttackTime);
+            //Debug.Log(_enemy.gameObject.name + "drone" + _enemy.transform.rotation);
+            //Debug.Log(_enemy.gameObject.name + "target" + _targetRotation);
 
-            //Debug.Log(_enemy.transform.rotation);
-            //Debug.Log(_targetRotation); might not be needed anymore
         }
         else
         {
             //attacktime is set to 0 onEnter so the transition chosses how long it wants AT to add up before transitioning
             _enemy.MoveForward();
             AttackTime += Time.deltaTime;
+            //Debug.Log(_enemy.gameObject.name +"drone"+ _enemy.transform.rotation);
+            //Debug.Log(_enemy.gameObject.name +"target"+ _targetRotation);
         }
     }
 

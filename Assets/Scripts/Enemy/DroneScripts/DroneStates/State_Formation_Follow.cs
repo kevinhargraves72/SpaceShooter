@@ -20,12 +20,12 @@ public class State_Formation_Follow : IState
     }
     public void Tick()
     {
-        Debug.Log(Vector3.Distance(_enemy.transform.position, _formationHandler.CalculateFormationFollowTarget(_offset)));
+        //Debug.Log(Vector3.Distance(_enemy.transform.position, _formationHandler.CalculateFormationFollowTarget(_offset)));
         //if ((_enemy.transform.position.y * _formationHandler.GetLeaderUp()).y - (_formationHandler.CalculateFormationFollowTarget(_offset).y * _formationHandler.GetLeaderUp()).y  <= _formationHandler.followBuffer)
-        Debug.Log(((_enemy.transform.position - _formationHandler.CalculateFormationFollowTarget(_offset)).sqrMagnitude < _formationHandler.followBuffer));
+        //Debug.Log(((_enemy.transform.position - _formationHandler.CalculateFormationFollowTarget(_offset)).sqrMagnitude < _formationHandler.followBuffer));
         if(Vector3.Distance(_enemy.transform.position, _formationHandler.CalculateFormationFollowTarget(_offset)) <= _formationHandler.followBuffer)
         {
-            Debug.Log("sSpeed:" + _enemy.Speed);
+            //Debug.Log("sSpeed:" + _enemy.Speed);
             if (_enemy.Speed > initialMaxSpeed)
             {
 
@@ -38,7 +38,7 @@ public class State_Formation_Follow : IState
         {
             if ((_enemy.transform.position * _enemy.transform.up.y).y < (_formationHandler.CalculateFormationFollowTarget(_offset) * _enemy.transform.up.y).y)
             {
-                Debug.Log("Speed:" + _enemy.Speed);
+                //Debug.Log("Speed:" + _enemy.Speed);
                 if (_enemy.Speed <= initialMaxSpeed + (initialMaxSpeed * 0.25f))
                 {
                     _enemy.Speed += 3.25f * Time.deltaTime;
@@ -46,7 +46,7 @@ public class State_Formation_Follow : IState
             }
             if ((_enemy.transform.position * _enemy.transform.up.y).y > (_formationHandler.CalculateFormationFollowTarget(_offset) * _enemy.transform.up.y).y)
             {
-                Debug.Log("Speed:" + _enemy.Speed);
+                //Debug.Log("Speed:" + _enemy.Speed);
                 if (_enemy.Speed >= initialMaxSpeed - (initialMaxSpeed * 0.25f))
                 {
                     _enemy.Speed -= 5.25f * Time.deltaTime;
