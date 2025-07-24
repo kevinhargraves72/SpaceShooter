@@ -8,22 +8,34 @@ public class FormationHandler : MonoBehaviour
 {
     public GameObject[] formationGroup;
     public float followBuffer = 0.5f;
-    
+
+    public int maxFormationLength;
+    public float formationSearchRange;
+
     private int formationPosition;
     private int leaderPosition = 0;
     private bool isLeader;
+
+    private bool preset = false;
+
+    private LayerMask _enemyLayerMask;
+
+    Color _gizmoIdleColor = Color.yellow;
+    Color _gizmoDetectedColor = Color.red;
     void Start()
     {
         if (formationGroup.Length > 1)
         {
             formationPosition = FindFormationPosition();
             isLeader = IsLeader();
+            preset = true;
         }
         else//this part is proabably not needed yet, to be possibly used with formation finding drones
         {
             formationPosition = 0;
             isLeader = true;
         }
+        _enemyLayerMask = LayerMask.GetMask("Enemy");
     }
 
     // Update is called once per frame
@@ -115,5 +127,32 @@ public class FormationHandler : MonoBehaviour
     public Vector3 GetLeaderUp()
     {
         return formationGroup[leaderPosition].GetComponent<Transform>().up;
+    }
+
+    public bool getPreset()
+    {
+        return preset;
+    }
+
+    private Collider2D[] DetectFormationInRange()
+    {
+        Collider2D[] colliders = new Collider2D[maxFormationLength - formationGroup.Length];
+        int index = 0;
+        foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, formationSearchRange, _enemyLayerMask))
+        {
+            if(collider.GetComponent<FormationHandler>() != null)
+            {
+                if(collider.GetComponent<FormationHandler>().getPreset() == false)
+                {
+                    if(index < colliders.Length)
+                    {
+                        colliders[index] = collider;
+                        index++;
+                    }
+                }
+            }
+        }
+        
+        return colliders;
     }
 }
