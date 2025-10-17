@@ -34,6 +34,8 @@ public class FormationHandler : MonoBehaviour
         {
             formationPosition = 0;
             isLeader = true;
+            formationGroup = new GameObject[maxFormationLength];
+            formationGroup[0] = this.gameObject;
         }
         _enemyLayerMask = LayerMask.GetMask("Enemy");
     }
@@ -134,25 +136,83 @@ public class FormationHandler : MonoBehaviour
         return preset;
     }
 
+    public int GetCurrentFormationSize()
+    {
+        int size = 0;
+        foreach(GameObject drone in  formationGroup)
+        {
+            if (drone != null)
+            {
+                size++;
+            }
+        }
+        return size;
+    }
+
+    public float DistanceToPlayer(Vector3 enemyPosition)
+    {
+        return Vector3.Distance(enemyPosition, this.GetComponent<PlayerDetector>().GetPlayerPosition());
+    }
+
     private Collider2D[] DetectFormationInRange()
     {
-        Collider2D[] colliders = new Collider2D[maxFormationLength - formationGroup.Length];
+        Collider2D[] colliders = new Collider2D[maxFormationLength - GetCurrentFormationSize()];
         int index = 0;
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, formationSearchRange, _enemyLayerMask))
         {
-            if(collider.GetComponent<FormationHandler>() != null)
+            if(index < colliders.Length)
             {
-                if(collider.GetComponent<FormationHandler>().getPreset() == false)
+                if (collider.GetComponent<FormationHandler>() != null)
                 {
-                    if(index < colliders.Length)
+                    if (collider.GetComponent<FormationHandler>().getPreset() == false && collider.GetComponent<FormationHandler>().GetCurrentFormationSize() <= colliders.Length - index) //checks theres enough room in colliders for all drones in this ones formation (subtracts the index to account for any drones added so far)
                     {
-                        colliders[index] = collider;
-                        index++;
+                        if(collider.GetComponent<FormationHandler>().GetCurrentFormationSize() < GetCurrentFormationSize())
+                        {
+                            foreach (GameObject drone in collider.GetComponent<FormationHandler>().formationGroup)
+                            {
+                                if (drone != null)
+                                {
+                                    colliders[index] = drone.GetComponent<Collider2D>();
+                                    index++;
+                                }
+                            }
+                            //colliders[index] = collider;
+                            //index++;
+                            //Adding to the formation needs to be done differently from this to add all the drones in the added drones formation
+                        }
+                        else if(collider.GetComponent<FormationHandler>().GetCurrentFormationSize() == GetCurrentFormationSize())
+                        {
+                            if(DistanceToPlayer(this.transform.position) < DistanceToPlayer(collider.transform.position)) //Could this have issues because playerdetector.getplayerposition returns (0,0,0) if the player == null? (probably shouldnt cuz of how drone states work)
+                            {
+                                foreach (GameObject drone in collider.GetComponent<FormationHandler>().formationGroup)
+                                {
+                                    if (drone != null)
+                                    {
+                                        colliders[index] = drone.GetComponent<Collider2D>();
+                                        index++;
+                                    }
+                                }
+                                //colliders[index] = collider;
+                                //index++;
+                            }
+                            //If THIS drone is closer to the player then the drone / "collider" its checking, then add the formation to THIS ones array
+                            //Make method to figure this out
+                        }
                     }
                 }
             }
+            else
+            {
+                break;
+            }
+            
         }
         
         return colliders;
     }
+
+    //ToDo:
+    //Goiong to need a public function that the drones state machine can call that will call the function above and use its output
+    //to create the new formation group and give all the drones the updated information they need
+    //which may just be the new formation group array and offset (might need another offset for when the drone is not the leader)
 }

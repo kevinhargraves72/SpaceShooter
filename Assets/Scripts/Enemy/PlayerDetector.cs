@@ -37,6 +37,11 @@ public class PlayerDetector : MonoBehaviour
         }
     }
 
+    public GameObject GetPlayer()
+    {
+        return _detectedPlayer.gameObject;
+    }
+
     public bool SearchInRange(float range)
     {
         Collider2D collider = Physics2D.OverlapCircle(transform.position, range, _playerLayerMask);
